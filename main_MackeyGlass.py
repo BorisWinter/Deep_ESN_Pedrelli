@@ -39,14 +39,14 @@ def main():
    
     # dataset path 
     path = 'datasets'
-    dataset, Nu, error_function, optimization_problem, TR_indexes, VL_indexes, TS_indexes = load_chest(path, MSE)
+    dataset, Nu, error_function, optimization_problem, TR_indexes, VL_indexes, TS_indexes = load_MG(path, MSE)
 
     # load configuration for pianomidi task
     configs = config_chest(list(TR_indexes) + list(VL_indexes))
     
     # Be careful with memory usage
-    Nr = 10 # number of recurrent units
-    Nl = 10 # number of recurrent layers
+    Nr = 100 # number of recurrent units
+    Nl = 5 # number of recurrent layers
     reg = 0.0;
     transient = 100
     

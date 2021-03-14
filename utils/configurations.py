@@ -95,3 +95,23 @@ def config_chest(IP_indexes):
     configs.readout.regularizations = 10.0**np.array(range(-16,-1,1))
     
     return configs
+
+def config_washout_test(IP_indexes):
+
+    configs = Struct()
+    
+    configs.rhos = 0.9 # set spectral radius 0.9 for all recurrent layers
+    configs.lis = 1.0 # set li 1.0 for all recurrent layers
+    configs.iss = 0.1 # set insput scale 0.1 for all recurrent layers
+    
+    configs.IPconf = Struct()
+    configs.IPconf.DeepIP = 0 # deactivate pre-train
+
+    configs.reservoirConf = Struct()
+    configs.reservoirConf.connectivity = 1 # connectivity of recurrent matrix
+    
+    configs.readout = Struct()
+    configs.readout.trainMethod = 'SVD' # train with singular value decomposition (more accurate)
+    configs.readout.regularizations = 10.0**np.array(range(-16,-1,1))
+    
+    return configs

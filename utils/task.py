@@ -124,3 +124,48 @@ def load_chest(path, metric_function):
     print("Done loading data")
     return dataset, Nu, error_function, optimization_problem, TR_indexes, VL_indexes, TS_indexes
   
+def load_washout_test(path, metric_function):
+    
+   # simply input constant data and see how that 
+    data = pd.read_csv(os.path.join(path, 'subject2_chest_1st100k.csv'))
+    #data['Chest_Temp'][:] = 4.3 # just some number 
+    #print(f"shape; {data['Chest_Temp'][1:].shape}")
+
+    dataset = Struct()
+    dataset.name = 'washout_test'
+    dataset.inputs = [np.array([[4.20] for _ in range(10000)]).T]
+    dataset.targets =  [np.array([[6.9] for _ in range(10000)]).T]
+
+    print(f"original inputs shape: \t{np.array([data['Chest_Temp'][:-1]]).shape}")
+    print(f"new inputs shape: \t{dataset.inputs[0].shape}")
+
+    print(f"original targets shape: \t{np.array([data['Chest_Temp'][1:]]).shape}")
+    print(f"new targets shape: \t{dataset.targets[0].shape}")
+
+
+    # print(dataset.inputs)
+    input_length = len(dataset.inputs[0][0])
+    print("input length = ", input_length)
+    # print("target length = ", len(dataset.targets))
+
+    # input dimension
+    Nu = dataset.inputs[0].shape[0]
+    # print("Nu = ", Nu)
+
+    # function used for model evaluation
+    error_function = metric_function    
+    
+    # select the model that achieves the maximum accuracy on validation set
+    optimization_problem = np.argmin   
+    
+    TR_indexes = range(int(.4*input_length)) # indexes for training, validation and test set in Piano-midi.de task
+    VL_indexes = range(int(.4*input_length), int(.5*input_length))
+    TS_indexes = range(int(.5*input_length), int(input_length-1))
+
+    print(".4 = ", int(.4*input_length))
+    print(".5 = ", int(.5*input_length))
+    print("-1 = ", int(input_length - 1))
+    
+    print("Done loading data")
+    return dataset, Nu, error_function, optimization_problem, TR_indexes, VL_indexes, TS_indexes
+  
