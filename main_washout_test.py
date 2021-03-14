@@ -33,6 +33,7 @@ import numpy as np
 import random
 from DeepESN import DeepESN
 from utils import MSE, config_MG, load_MG, config_chest, load_chest, config_washout_test, load_washout_test, select_indexes
+import matplotlib.pyplot as plt
 class Struct(object): pass
 
 # sistemare indici per IP in config_pianomidi, mettere da un'altra parte
@@ -58,21 +59,34 @@ def main():
     deepESN = DeepESN(Nu, Nr, Nl, configs)
     states = deepESN.computeState(dataset.inputs, deepESN.IPconf.DeepIP)
     
-    train_states = select_indexes(states, list(TR_indexes) + list(VL_indexes), transient)
-    train_targets = select_indexes(dataset.targets, list(TR_indexes) + list(VL_indexes), transient)
-    test_states = select_indexes(states, TS_indexes)
-    test_targets = select_indexes(dataset.targets, TS_indexes)
+    # train_states = select_indexes(states, list(TR_indexes) + list(VL_indexes), transient)
+    # train_targets = select_indexes(dataset.targets, list(TR_indexes) + list(VL_indexes), transient)
+    # test_states = select_indexes(states, TS_indexes)
+    # test_targets = select_indexes(dataset.targets, TS_indexes)
     
-    deepESN.trainReadout(train_states, train_targets, reg)
+    # deepESN.trainReadout(train_states, train_targets, reg)
     
-    train_outputs = deepESN.computeOutput(train_states)
-    train_error = error_function(train_outputs, train_targets)
-    print('Training ACC: ', np.mean(train_error), '\n')
+    # train_outputs = deepESN.computeOutput(train_states)
+    # train_error = error_function(train_outputs, train_targets)
+    # print('Training ACC: ', np.mean(train_error), '\n')
     
-    test_outputs = deepESN.computeOutput(test_states)
-    test_error = error_function(test_outputs, test_targets)
-    print('Test ACC: ', np.mean(test_error), '\n')
+    # test_outputs = deepESN.computeOutput(test_states)
+    # test_error = error_function(test_outputs, test_targets)
+    # print('Test ACC: ', np.mean(test_error), '\n')
  
+
+    # The interesting output would be some notion of how much a neuron's activation is changing after time
+    # Therefore, since we have constant inputs, we can take the average difference over all neurons per timestep
+    # and plot
+    differences = np.zeros(states[0].shape)
+    print(states[0].shape)
+    for t in range(len(states[0].T) - 1):
+        for idx, value in enumerate(states[0].T[t, :]): # iterate over all values
+            differences[idx][t] = abs(states[0].T[t + 1, idx] - value)
+
+    #now plot averages over all neurons:
+    plt.plot(np.mean(differences, axis = 0)[:50])
+    plt.show()
  
 if __name__ == "__main__":
     main()
