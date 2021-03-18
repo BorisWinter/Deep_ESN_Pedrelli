@@ -1,6 +1,6 @@
 '''
 Task configuration file
-    
+
 ----
 
 This file is a part of the DeepESN Python Library (DeepESNpy)
@@ -28,11 +28,11 @@ def select_indexes(data, indexes, transient=0):
 
     if len(data) == 1:
         return [data[0][:,indexes][:,transient:]]
-    
+
     return [data[i][:,transient:] for i in indexes]
 
 def load_pianomidi(path, metric_function):
-    
+
     data = loadmat(os.path.join(path, 'pianomidi.mat')) # load dataset
 
     dataset = Struct()
@@ -44,20 +44,20 @@ def load_pianomidi(path, metric_function):
     Nu = dataset.inputs[0].shape[0]
 
     # function used for model evaluation
-    error_function = functools.partial(metric_function, 0.5)     
-    
+    error_function = functools.partial(metric_function, 0.5)
+
     # select the model that achieves the maximum accuracy on validation set
-    optimization_problem = np.argmax    
-    
-    
+    optimization_problem = np.argmax
+
+
     TR_indexes = range(87) # indexes for training, validation and test set in Piano-midi.de task
     VL_indexes = range(87,99)
     TS_indexes = range(99,124)
-    
+
     return dataset, Nu, error_function, optimization_problem, TR_indexes, VL_indexes, TS_indexes
 
 def load_MG(path, metric_function):
-    
+
     data = loadmat(os.path.join(path, 'MG.mat')) # load dataset
 
     dataset = Struct()
@@ -72,26 +72,33 @@ def load_MG(path, metric_function):
     Nu = dataset.inputs[0].shape[0]
 
     # function used for model evaluation
-    error_function = metric_function    
-    
+    error_function = metric_function
+
     # select the model that achieves the maximum accuracy on validation set
-    optimization_problem = np.argmin   
-    
-    
+    optimization_problem = np.argmin
+
+
     TR_indexes = range(4000) # indexes for training, validation and test set in Piano-midi.de task
     VL_indexes = range(4000,5000)
     TS_indexes = range(5000,9999)
-    
+
     return dataset, Nu, error_function, optimization_problem, TR_indexes, VL_indexes, TS_indexes
-  
+
 
 '''
 Function for loading the chest data
 '''
-def load_chest(path, metric_function):
-    
+def load_chest(path, data_size=None, sampling_rate=None):
+
     # data = loadmat(os.path.join(path, 'MG.mat')) # load dataset
-    data = pd.read_csv(os.path.join(path, 'subject2_chest.csv'))
+    data = pd.read_csv(os.path.join(path, 'subject2_baseline_train.csv'))
+    if sampling_rate is not None:
+        data = data[::sampling_rate] #sampling to increase timestep length
+
+    if data_size is not None:
+        data = data[:data_size] #shorten for lower computational demand
+
+
 
     dataset = Struct()
     dataset.name = 'Chest'
@@ -107,12 +114,6 @@ def load_chest(path, metric_function):
     Nu = dataset.inputs[0].shape[0]
     # print("Nu = ", Nu)
 
-    # function used for model evaluation
-    error_function = metric_function    
-    
-    # select the model that achieves the maximum accuracy on validation set
-    optimization_problem = np.argmin   
-    
     TR_indexes = range(int(.4*input_length)) # indexes for training, validation and test set in Piano-midi.de task
     VL_indexes = range(int(.4*input_length), int(.5*input_length))
     TS_indexes = range(int(.5*input_length), int(input_length-1))
@@ -120,7 +121,6 @@ def load_chest(path, metric_function):
     print(".4 = ", int(.4*input_length))
     print(".5 = ", int(.5*input_length))
     print("-1 = ", int(input_length - 1))
-    
+
     print("Done loading data")
-    return dataset, Nu, error_function, optimization_problem, TR_indexes, VL_indexes, TS_indexes
-  
+    return dataset, Nu, TR_indexes, VL_indexes, TS_indexes
