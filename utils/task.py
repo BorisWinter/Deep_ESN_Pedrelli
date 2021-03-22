@@ -114,12 +114,12 @@ def load_chest(path, data_size=None, sampling_rate=None):
     Nu = dataset.inputs[0].shape[0]
     # print("Nu = ", Nu)
 
-    TR_indexes = range(int(.4*input_length)) # indexes for training, validation and test set in Piano-midi.de task
-    VL_indexes = range(int(.4*input_length), int(.5*input_length))
-    TS_indexes = range(int(.5*input_length), int(input_length-1))
+    TR_indexes = range(int(.7*input_length)) # indexes for training, validation and test set in Piano-midi.de task
+    VL_indexes = range(int(.7*input_length), int(.8*input_length))
+    TS_indexes = range(int(.8*input_length), int(input_length-1))
 
-    print(".4 = ", int(.4*input_length))
-    print(".5 = ", int(.5*input_length))
+    print(".7 = ", int(.7*input_length))
+    print(".8 = ", int(.8*input_length))
     print("-1 = ", int(input_length - 1))
 
     print("Done loading data")
