@@ -102,8 +102,8 @@ def load_chest(path, data_size=None, sampling_rate=None):
 
     dataset = Struct()
     dataset.name = 'Chest'
-    dataset.inputs = [np.array([data['Chest_Temp'][:-1]])]
-    dataset.targets = [np.array([data['Chest_Temp'][1:]])]
+    dataset.inputs = [np.array([data['Chest_ECG'][:-1]])]
+    dataset.targets = [np.array([data['Chest_ECG'][1:]])]
 
     # print(dataset.inputs)
     input_length = len(dataset.inputs[0][0])
