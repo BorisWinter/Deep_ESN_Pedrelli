@@ -262,7 +262,6 @@ class DeepESN():
             A = trainStates.dot(trainStates.T)
 
             self.Wout = np.linalg.solve((A + np.eye(A.shape[0], A.shape[1]) * lb), B.T).T
-
         if verbose:
             print('done.')
             sys.stdout.flush()
