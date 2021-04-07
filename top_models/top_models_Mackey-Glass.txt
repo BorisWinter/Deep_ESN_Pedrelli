@@ -1,0 +1,15 @@
+Model number:  2121
+transient  =  1000
+rhos  =  1.0
+reg  =  0.01
+lis  =  0.2
+iss  =  1.0
+con  =  1.0
+Nr  =  200
+Nl  =  10
+.sampling  =  1
+self_fed_MSE =  0.003846369521273
+signal_fed_MSE =  1.5558248454510573e-08
+
+
+

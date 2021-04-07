@@ -1,0 +1,30 @@
+Model number:  1716
+transient  =  1000
+rhos  =  1.0
+reg  =  10.0
+lis  =  0.2
+iss  =  1.0
+con  =  0.5
+Nr  =  10
+Nl  =  10
+.sampling  =  1
+self_fed_MSE =  0.3586863116646003
+signal_fed_MSE =  0.0057959680926629
+
+
+
+Model number:  722
+transient  =  1000
+rhos  =  1.2
+reg  =  0.01
+lis  =  0.1
+iss  =  1.0
+con  =  0.2
+Nr  =  100
+Nl  =  2
+.sampling  =  1
+self_fed_MSE =  0.4527520016037838
+signal_fed_MSE =  0.044738277384583
+
+
+

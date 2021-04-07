@@ -1,0 +1,15 @@
+Model number:  2143
+transient  =  1000
+rhos  =  3.0
+reg  =  0.01
+lis  =  0.5
+iss  =  1.0
+con  =  1.0
+Nr  =  200
+Nl  =  10
+.sampling  =  1
+self_fed_MSE =  0.0004608202953488
+signal_fed_MSE =  0.0004534518463941
+
+
+
