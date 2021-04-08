@@ -1,6 +1,6 @@
 # Deep_ESN_Pedrelli
 
-This repository contains an implementation of the DeepESN model by Luca Pedrelli, as described in the following paper:
+This repository contains an implementation of the DeepESN model described in the following paper:
 
 C. Gallicchio, A. Micheli, L. Pedrelli, "Deep Reservoir Computing: A Critical Experimental Analysis",
 Neurocomputing, 2017, vol. 268, pp. 87-99
