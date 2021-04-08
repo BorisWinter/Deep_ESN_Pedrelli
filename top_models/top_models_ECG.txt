@@ -1,0 +1,30 @@
+Model number:  1331
+transient  =  1000
+rhos  =  1.0
+reg  =  1.0
+lis  =  0.1
+iss  =  1.0
+con  =  0.5
+Nr  =  100
+Nl  =  5
+.sampling  =  1
+self_fed_MSE =  0.0360946752052509
+signal_fed_MSE =  0.0007159955916393
+
+
+
+Model number:  1876
+transient  =  1000
+rhos  =  1.0
+reg  =  10.0
+lis  =  0.1
+iss  =  1.0
+con  =  0.5
+Nr  =  100
+Nl  =  10
+.sampling  =  1
+self_fed_MSE =  0.0306318350958461
+signal_fed_MSE =  0.0015203854157115
+
+
+
