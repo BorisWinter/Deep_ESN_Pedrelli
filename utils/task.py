@@ -133,6 +133,8 @@ def load_chest_full(path):
     data1 = pd.read_csv(os.path.join(path, 'subject2_baseline_train.csv'))
     data2 = pd.read_csv(os.path.join(path, 'subject2_baseline_test.csv'))
     data = data1.append(data2)
+    data = data[20000:]#delete first 20k rows, as they have been used for the parameter sweep.
+    # data = data[:80000]  #optionally shorten dataset
 
     dataset = Struct()
     dataset.name = 'Chest'

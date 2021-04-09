@@ -270,16 +270,16 @@ class DeepESN():
         # This function was adapted by us personally: the by_layer flag
         # serves for visualization purposes of the internal dynamics
         # compute a linear combination between the global state and the output weights
-        
+
         state = np.concatenate(state,1)
-        
+
         if by_layer:
             #Go over all layers, compute output from this layer, then return as a list
             per_layer_signal = []
             for layer in range(self.Nl):
-                per_layer_signal.append(self.Wout[:, layer*self.Nr:(layer+1)*self.Nr].dot(state[layer*self.Nr:(layer+1)*self.Nr]))                                   
+                per_layer_signal.append(self.Wout[:, layer*self.Nr:(layer+1)*self.Nr].dot(state[layer*self.Nr:(layer+1)*self.Nr]))
             per_layer_signal.append(np.expand_dims(self.Wout[:,-1],1)) #bias
             return per_layer_signal
 
-        else:        
+        else:
             return self.Wout[:,0:-1].dot(state) + np.expand_dims(self.Wout[:,-1],1) # Wout product + add bias
