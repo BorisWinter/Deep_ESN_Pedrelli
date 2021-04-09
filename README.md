@@ -16,6 +16,6 @@ Alternatively, small example sets have been provided in the datasets folder.
 ## Running the experiments
 The following experiments can be run with the following files:
 
--`sweep.ipynb` to run the parameter sweeps
--`single_model_full_traning.ipynb` to train one model on a bigger dataset
+* `sweep.ipynb` to run the parameter sweeps
+* `single_model_full_traning.ipynb` to train one model on a bigger dataset
 
